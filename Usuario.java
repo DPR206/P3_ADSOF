@@ -18,6 +18,8 @@ public class Usuario {
 	private List<Enlace> enlacesDirectos = new LinkedList<Enlace>(); //tengo dudas sobre si hacer la declaracion de new
 	
 	/**
+	 * Crea un nuevo usuario con una amplificación por defecto (2) y una colección de enlaces vacía
+	 * 
 	 * @param nombre
 	 */
 	public Usuario(String nombre) {
@@ -27,6 +29,8 @@ public class Usuario {
 	}
 
 	/**
+	 * Crea un nuevo usuario con una colección de enlaces vacía
+	 * 
 	 * @param nombre
 	 * @param amplificacion
 	 */
@@ -36,18 +40,39 @@ public class Usuario {
 		this.enlacesDirectos = new LinkedList<Enlace>();
 	}
 	
+	/**
+	 * Obtiene el nombre del usuario
+	 * 
+	 * @return String, nombre del usuario
+	 */
 	public String getNombre() {
 		return this.nombre;
 	}
 	
+	/**
+	 * Obtiene la capacidad de amplificación
+	 * 
+	 * @return int, capacidad de amplificación
+	 */
 	public int getAmplicacion() {
 		return this.amplificacion;
 	}
 	
+	/**
+	 * Obtiene la colección de enlaces salientes
+	 * 
+	 * @return List<Enlace>, lista con los enlaces salientes
+	 */
 	public List<Enlace> getEnlaces(){
 		return this.enlacesDirectos;
 	}
 	
+	/**
+	 * Añade un nuevo enlace al usuario, siempre y cuando no sea preexistente o una autoreferencia
+	 * 
+	 * @param e, enlace nuevo a añadir
+	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
+	 */
 	public boolean addEnlace(Enlace e) {
 		
 		for(Enlace en: enlacesDirectos)
@@ -65,14 +90,31 @@ public class Usuario {
 	
 	//Falta sobreescribir el método
 	
+	/**
+	 * Obtiene el enlace en una posición dada
+	 * 
+	 * @param i, posición a buscar
+	 * @return Enlace, el enlace en dicha posición
+	 */
 	public Enlace getEnlace(int i) {
 		return this.enlacesDirectos.get(i);
 	}
 	
+	/**
+	 * Obtiene la cantidad de enlaces salientes de un usuario
+	 * 
+	 * @return int, representa el número de enlaces 
+	 */
 	public int getNumEnlaces(){
 		return this.enlacesDirectos.size();
 	}
 	
+	/**
+	 * Obtiene el enlace directo entre este usuario y el proporcionado
+	 * 
+	 * @param destino, usuario de destino
+	 * @return Enlace, el enlace de conexión o null si no existiera 
+	 */
 	public Enlace getEnlace(Usuario destino) {
 		for(Enlace e: enlacesDirectos)
 			if(e.getUsuarioDestino() == destino)

@@ -45,7 +45,7 @@ public class Enlace {
 	/**
 	 * Obtiene el usuario de origen
 	 * 
-	 * @return usuarioOrigen, usuario de origen
+	 * @return Usuario, usuario de origen
 	 */
 	public Usuario getUsuarioOrigen() {
 		return this.usuarioOrigen;
@@ -54,7 +54,7 @@ public class Enlace {
 	/**
 	 * Obtiene el usario de destino
 	 * 
-	 * @return usuarioDestino, usuario de destino
+	 * @return Usuario, usuario de destino
 	 */
 	public Usuario getUsuarioDestino() {
 		return this.usuarioDestino;
@@ -63,7 +63,7 @@ public class Enlace {
 	/**
 	 * Obtiene el coste del enlace
 	 * 
-	 * @return coste, coste del enlace
+	 * @return double, coste del enlace
 	 */
 	public double getCoste() {
 		return this.coste;
