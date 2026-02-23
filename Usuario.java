@@ -20,7 +20,7 @@ public class Usuario {
 	/**
 	 * Crea un nuevo usuario con una amplificación por defecto (2) y una colección de enlaces vacía
 	 * 
-	 * @param nombre
+	 * @param nombre, nombre del usuario
 	 */
 	public Usuario(String nombre) {
 		this.nombre = nombre;
@@ -31,8 +31,8 @@ public class Usuario {
 	/**
 	 * Crea un nuevo usuario con una colección de enlaces vacía
 	 * 
-	 * @param nombre
-	 * @param amplificacion
+	 * @param nombre, nombre del usuario
+	 * @param amplificacion, valor de la capacidad de amplificación
 	 */
 	public Usuario(String nombre, int amplificacion) {
 		this.nombre = nombre;
