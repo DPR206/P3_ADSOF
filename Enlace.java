@@ -86,6 +86,6 @@ public class Enlace {
 	 * @return String, cadena de texto con la información del enlace
 	 */
 	public String toString() {
-		return "@"+this.usuarioOrigen.getName()+"--"+this.coste+"-->@"+this.usuarioDestino.getName();
+		return "@"+this.usuarioOrigen.getNombre()+"--"+this.coste+"-->@"+this.usuarioDestino.getNombre();
 	}
 }
