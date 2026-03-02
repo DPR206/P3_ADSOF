@@ -88,7 +88,11 @@ public class Usuario {
 			return true;
 	}
 	
-	//Falta sobreescribir el método
+	public boolean addEnlace(Usuario usuario_des, double coste) {
+		
+		Enlace e = new Enlace(this, usuario_des, coste);
+		return this.addEnlace(e);
+	}
 	
 	/**
 	 * Obtiene el enlace en una posición dada
@@ -122,5 +126,12 @@ public class Usuario {
 		return null;
 	}
 	
-	//Falta el método toString
+	/**
+	 * Devuelve la información de un usuario como cadena de texto
+	 * 
+	 * @return String, cadena de texto con la información del usuario
+	 */
+	public String toString() {
+		return "@"+this.nombre+"("+this.amplificacion+")"+"["+this.enlacesDirectos+"]";
+	}
 }
