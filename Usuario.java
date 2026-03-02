@@ -91,7 +91,14 @@ public class Usuario {
 			return true;
 	}
 	
-	public boolean addEnlace(Usuario usuario_des, double coste) {
+	/**
+	 * Añade un nuevo enlace en base a un usuario de destino y un coste
+	 * 
+	 * @param usuario_des, el usuario de destino del enlace
+	 * @param coste, el coste del enlace
+	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
+	 */
+	public boolean addEnlace(Usuario usuario_des, int coste) {
 		if(usuario_des == null)
 			return false;
 		Enlace e = new Enlace(this, usuario_des, coste);

@@ -13,7 +13,7 @@ package red_social;
 public class Enlace {
 	private Usuario usuarioOrigen;
 	private Usuario usuarioDestino;
-	private double coste;
+	private int coste;
 	
 	/**
 	 * Crea un nuevo enlace
@@ -22,7 +22,7 @@ public class Enlace {
 	 * @param usuarioDestino, usuario de destino
 	 * @param coste, coste del enlace
 	 */
-	public Enlace(Usuario usuarioOrigen, Usuario usuarioDestino, double coste) {
+	public Enlace(Usuario usuarioOrigen, Usuario usuarioDestino, int coste) {
 		this.usuarioOrigen = usuarioOrigen;
 		this.usuarioDestino = usuarioDestino;
 		if(coste <= 0)
@@ -63,9 +63,9 @@ public class Enlace {
 	/**
 	 * Obtiene el coste del enlace
 	 * 
-	 * @return double, coste del enlace
+	 * @return int, coste del enlace
 	 */
-	public double getCoste() {
+	public int getCoste() {
 		return this.coste;
 	}
 	
