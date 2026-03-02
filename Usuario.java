@@ -75,6 +75,9 @@ public class Usuario {
 	 */
 	public boolean addEnlace(Enlace e) {
 		
+		if(e == null)
+			return false;
+		
 		for(Enlace en: enlacesDirectos)
 			if(en == e)
 				return false;
@@ -89,7 +92,8 @@ public class Usuario {
 	}
 	
 	public boolean addEnlace(Usuario usuario_des, double coste) {
-		
+		if(usuario_des == null)
+			return false;
 		Enlace e = new Enlace(this, usuario_des, coste);
 		return this.addEnlace(e);
 	}
@@ -120,6 +124,10 @@ public class Usuario {
 	 * @return Enlace, el enlace de conexión o null si no existiera 
 	 */
 	public Enlace getEnlace(Usuario destino) {
+		
+		if(destino == null)
+			return null;
+		
 		for(Enlace e: enlacesDirectos)
 			if(e.getUsuarioDestino() == destino)
 				return e;
