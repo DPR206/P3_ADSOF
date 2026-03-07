@@ -17,9 +17,11 @@ public class Mensaje {
 	private Usuario usuarioActual;
 	
 	/**
-	 * @param autor
-	 * @param alcance
-	 * @param usuarioActual
+	 * Crea un nuevo mensaje
+	 * 
+	 * @param autor, autor del mensaje
+	 * @param alcance, alcance del mensaje
+	 * @param usuarioActual, usuario actual del mensaje
 	 */
 	public Mensaje(Usuario autor, int alcance, Usuario usuarioActual) {
 		this.autor = autor;
