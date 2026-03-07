@@ -3,7 +3,7 @@
  */
 package red_social;
 
-
+import java.util.*;
 /**
  * Esta clase representa un mensaje
  * @author Claudia Saiz Escribano y Duna Puente Romera. 
@@ -128,4 +128,22 @@ public class Mensaje {
 			return false;	
 	}
 	
+	/**
+	 * Difunde un mensaje dentro de una lista de usuarios si se dan las condiciones
+	 * 
+	 * @param usuarios usuarios sobre los que realizar la difusión
+	 * @return true si se ha difundido el mensaje, false en caso contrario
+	 */
+	public boolean difunde(List<Usuario> usuarios) {
+		boolean status = true;
+		Enlace e;
+		int index;
+		for(Usuario u:usuarios) {
+			index = usuarios.indexOf(u);
+			e = u.getEnlace(usuarios.get(index));
+			if(difunde(e) == false)
+				status = false;
+		}
+		return status;
+	}
 }
