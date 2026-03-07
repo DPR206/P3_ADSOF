@@ -12,39 +12,39 @@ import java.util.*;
  * 
  */
 public class Mensaje {
-	private Usuario autor;
+	private String texto;
 	private int alcance;
 	private Usuario usuarioActual;
 	
 	/**
 	 * Crea un nuevo mensaje
 	 * 
-	 * @param autor, autor del mensaje
+	 * @param texto, texto del mensaje
 	 * @param alcance, alcance del mensaje
 	 * @param usuarioActual, usuario actual del mensaje
 	 */
-	public Mensaje(Usuario autor, int alcance, Usuario usuarioActual) {
-		this.autor = autor;
+	public Mensaje(String texto, int alcance, Usuario usuarioActual) {
+		this.texto = texto;
 		this.alcance = alcance;
 		this.usuarioActual = usuarioActual;
 	}
 
 	/**
-	 * Obtiene el autor del mensaje
+	 * Obtiene el texto del mensaje
 	 * 
-	 * @return Usuario, el autor
+	 * @return String, el texto
 	 */
-	public Usuario getAutor() {
-		return autor;
+	public String getTexto() {
+		return texto;
 	}
 
 	/**
-	 * Establece el nombre de usuario
+	 * Establece el texto del mensaje
 	 * 
-	 * @param autor, autor a determinar
+	 * @param texto, texto a determinar
 	 */
-	public void setAutor(Usuario autor) {
-		this.autor = autor;
+	public void setAutor(String texto) {
+		this.texto = texto;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class Mensaje {
 	 * @return String, cadena de texto con la información del mensaje
 	 */
 	public String toString() {
-		return "Mensaje(m:"+alcance+") en @"+usuarioActual.getNombre();
+		return "Mensaje("+texto+":"+alcance+") en @"+usuarioActual.getNombre();
 	}
 	
 	/**
