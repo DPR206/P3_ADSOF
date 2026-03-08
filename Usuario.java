@@ -54,7 +54,7 @@ public class Usuario {
 	 * 
 	 * @return int, capacidad de amplificación
 	 */
-	public int getAmplicacion() {
+	public int getAmplificacion() {
 		return this.amplificacion;
 	}
 	
@@ -65,6 +65,44 @@ public class Usuario {
 	 */
 	public List<Enlace> getEnlaces(){
 		return this.enlacesDirectos;
+	}
+	
+	/**
+	 * Añade un nuevo enlace al usuario, siempre y cuando no sea preexistente o una autoreferencia
+	 * 
+	 * @param e, enlace nuevo a añadir
+	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
+	 */
+	public boolean addEnlace(Enlace e) {
+		
+		if(e == null)
+			return false;
+		
+		for(Enlace en: enlacesDirectos)
+			if(en == e)
+				return false;
+		
+		if(e.getUsuarioOrigen() != this)
+			return false;
+		else if(e.getUsuarioDestino() == this)
+			return false;
+		else
+			this.enlacesDirectos.add(e);
+			return true;
+	}
+	
+	/**
+	 * Añade un nuevo enlace en base a un usuario de destino y un coste
+	 * 
+	 * @param usuario_des, el usuario de destino del enlace
+	 * @param coste, el coste del enlace
+	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
+	 */
+	public boolean addEnlace(Usuario usuario_des, int coste) {
+		if(usuario_des == null)
+			return false;
+		Enlace e = new Enlace(this, usuario_des, coste);
+		return this.addEnlace(e);
 	}
 	
 	/**
@@ -102,46 +140,6 @@ public class Usuario {
 				return e;
 		return null;
 	}
-	
-	/**
-	 * Añade un nuevo enlace al usuario, siempre y cuando no sea preexistente o una autoreferencia
-	 * 
-	 * @param e, enlace nuevo a añadir
-	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
-	 */
-	public boolean addEnlace(Enlace e) {
-		
-		if(e == null)
-			return false;
-		
-		for(Enlace en: enlacesDirectos)
-			if(en == e)
-				return false;
-		
-		if(e.getUsuarioOrigen() != this)
-			return false;
-		else if(e.getUsuarioDestino() == this)
-			return false;
-		else {
-			this.enlacesDirectos.add(e);
-			return true;
-		}
-	}
-	
-	/**
-	 * Añade un nuevo enlace en base a un usuario de destino y un coste
-	 * 
-	 * @param usuario_des, el usuario de destino del enlace
-	 * @param coste, el coste del enlace
-	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
-	 */
-	public boolean addEnlace(Usuario usuario_des, int coste) {
-		if(usuario_des == null)
-			return false;
-		Enlace e = new Enlace(this, usuario_des, coste);
-		return this.addEnlace(e);
-	}
-	
 	
 	/**
 	 * Devuelve la información de un usuario como cadena de texto

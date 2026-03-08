@@ -120,10 +120,9 @@ public class Mensaje {
 	 * @return true si se ha difundido el mensaje, false en caso contrario
 	 */
 	public boolean difunde(Enlace e) {
-		
 		if(e.getUsuarioOrigen()==this.usuarioActual && this.puedeDifundirPor(e) && this.aceptadoPor(e.getUsuarioDestino())) {
 			this.setUsuarioActual(e.getUsuarioDestino());
-			alcance = alcance - e.getCoste() + e.getUsuarioDestino().getAmplicacion();
+			alcance = alcance - e.getCoste() + e.getUsuarioDestino().getAmplificacion();
 			return true;
 		} else
 			return false;	
@@ -135,7 +134,7 @@ public class Mensaje {
 	 * @param usuarios usuarios sobre los que realizar la difusión
 	 * @return true si se ha difundido el mensaje, false en caso contrario
 	 */
-	public boolean difunde(Usuario... usuarios) {
+	public boolean difunde(Usuario...usuarios) {
 		boolean status = true;
 		Usuario conMensaje = this.usuarioActual;
 		Enlace e;

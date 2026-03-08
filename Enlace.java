@@ -14,6 +14,7 @@ public class Enlace {
 	private Usuario usuarioOrigen;
 	private Usuario usuarioDestino;
 	private int coste;
+	private static int total_coste = 0;
 	
 	/**
 	 * Crea un nuevo enlace
@@ -28,6 +29,7 @@ public class Enlace {
 		if(coste <= 0)
 			this.coste=1;
 		this.coste = coste;
+		Enlace.total_coste+=this.coste;
 	}
 	
 	/**
@@ -37,9 +39,7 @@ public class Enlace {
 	 * @param usuarioDestino, usuario de destino
 	 */
 	public Enlace(Usuario usuarioOrigen, Usuario usuarioDestino) {
-		this.usuarioOrigen = usuarioOrigen;
-		this.usuarioDestino = usuarioDestino;
-		this.coste=1;
+		new Enlace(usuarioOrigen, usuarioDestino, 1);
 	}
 	
 	/**
@@ -67,6 +67,33 @@ public class Enlace {
 	 */
 	public int getCoste() {
 		return this.coste;
+	}
+	
+	/**
+	 * Obtiene la suma de costes de todos los enlaces creados
+	 * 
+	 * @return int, suma total de costes
+	 */
+	public int getTotalCostes() {
+		return Enlace.total_coste;
+	}
+	
+	/**
+	 * Obtiene el coste de los enlaces especiales
+	 * 
+	 * @return int, coste del enlace especial
+	 */
+	public int costeEspecial() {
+		return 0;
+	}
+	
+	/**
+	 * Obtiene el coste real de un enlace
+	 * 
+	 * @return int, coste real del enlace
+	 */
+	public int costeReal() {
+		return this.coste + this.costeEspecial();
 	}
 	
 	/**
