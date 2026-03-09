@@ -15,29 +15,54 @@ import java.util.*;
 public class Usuario {
 	private String nombre;
 	private int amplificacion;
-	private List<Enlace> enlacesDirectos = new LinkedList<Enlace>(); //tengo dudas sobre si hacer la declaracion de new
+	private List<Enlace> enlacesDirectos;
+	private Exposicion exposicion;
+	private List<Mensaje> mensajes;
+	private double avgAlcance;
+	
+	/**
+	 * Crea un nuevo usuario con una amplificación por defecto (2), exposicion por defecto (ALTA) y una colección de enlaces vacía
+	 * 
+	 * @param nombre, nombre del usuario
+	 */
+	public Usuario(String nombre) {
+		this(nombre, 2, Exposicion.ALTA);
+	}
 	
 	/**
 	 * Crea un nuevo usuario con una amplificación por defecto (2) y una colección de enlaces vacía
 	 * 
 	 * @param nombre, nombre del usuario
+	 * @param e, exposicion del usuario
 	 */
-	public Usuario(String nombre) {
-		this.nombre = nombre;
-		this.amplificacion = 2;
-		this.enlacesDirectos = new LinkedList<Enlace>();
+	public Usuario(String nombre, Exposicion e) {
+		this(nombre, 2, e);
 	}
 
 	/**
-	 * Crea un nuevo usuario con una colección de enlaces vacía
+	 * Crea un nuevo usuario con una colección de enlaces vacía, con exposicion por defecto (ALTA)
 	 * 
 	 * @param nombre, nombre del usuario
 	 * @param amplificacion, valor de la capacidad de amplificación
 	 */
 	public Usuario(String nombre, int amplificacion) {
+		this(nombre, amplificacion, Exposicion.ALTA);
+	}
+	
+	/**
+	 * Crea un nuevo usuario con una colección de enlaces vacía
+	 * 
+	 * @param nombre, nombre del usuario
+	 * @param amplificacion, valor de la capacidad de amplificación
+	 * @param e, exposicion del usuario
+	 */
+	public Usuario(String nombre, int amplificacion, Exposicion e) {
 		this.nombre = nombre;
 		this.amplificacion = amplificacion;
-		this.enlacesDirectos = new LinkedList<Enlace>();
+		this.exposicion = e;
+		this.avgAlcance = 0;
+		this.enlacesDirectos = new LinkedList<>();
+		this.mensajes = new LinkedList<>();
 	}
 	
 	/**
@@ -65,44 +90,6 @@ public class Usuario {
 	 */
 	public List<Enlace> getEnlaces(){
 		return this.enlacesDirectos;
-	}
-	
-	/**
-	 * Añade un nuevo enlace al usuario, siempre y cuando no sea preexistente o una autoreferencia
-	 * 
-	 * @param e, enlace nuevo a añadir
-	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
-	 */
-	public boolean addEnlace(Enlace e) {
-		
-		if(e == null)
-			return false;
-		
-		for(Enlace en: enlacesDirectos)
-			if(en == e)
-				return false;
-		
-		if(e.getUsuarioOrigen() != this)
-			return false;
-		else if(e.getUsuarioDestino() == this)
-			return false;
-		else
-			this.enlacesDirectos.add(e);
-			return true;
-	}
-	
-	/**
-	 * Añade un nuevo enlace en base a un usuario de destino y un coste
-	 * 
-	 * @param usuario_des, el usuario de destino del enlace
-	 * @param coste, el coste del enlace
-	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
-	 */
-	public boolean addEnlace(Usuario usuario_des, int coste) {
-		if(usuario_des == null)
-			return false;
-		Enlace e = new Enlace(this, usuario_des, coste);
-		return this.addEnlace(e);
 	}
 	
 	/**
@@ -140,6 +127,78 @@ public class Usuario {
 				return e;
 		return null;
 	}
+	
+	public Exposicion getExposicion() {
+		return exposicion;
+	}
+	
+	/**
+	 * Añade un nuevo enlace al usuario, siempre y cuando no sea preexistente o una autoreferencia
+	 * 
+	 * @param e, enlace nuevo a añadir
+	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
+	 */
+	public boolean addEnlace(Enlace e) {
+		
+		if(e == null)
+			return false;
+		
+		for(Enlace en: enlacesDirectos)
+			if(en == e)
+				return false;
+		
+		if(e.getUsuarioOrigen() != this)
+			return false;
+		else if(e.getUsuarioDestino() == this)
+			return false;
+		else {
+			this.enlacesDirectos.add(e);
+			return true;
+		}
+	}
+	
+	/**
+	 * Añade un nuevo enlace en base a un usuario de destino y un coste
+	 * 
+	 * @param usuario_des, el usuario de destino del enlace
+	 * @param coste, el coste del enlace
+	 * @return true si el enlace se ha añadido correctamente, false en el caso contrario
+	 */
+	public boolean addEnlace(Usuario usuario_des, int coste) {
+		if(usuario_des == null)
+			return false;
+		Enlace e = new Enlace(this, usuario_des, coste);
+		return this.addEnlace(e);
+	}
+	
+	/**
+	 * Cambia la exposicion de un usuario al valor dado
+	 * 
+	 * @param e, nueva exposicion del usuario
+	 * @return void
+	 */
+	public void cambiarExposicion(Exposicion e) {
+		this.exposicion = e;
+	}
+	
+	/**
+	 * Añade un mensaje al historial del usuario y ajusta su exposicion
+	 * 
+	 * @param mensaje, mensaje que el usuario ha recibido
+	 * @return boolean, true si el mensaje se añade correctamente, false en caso contrario
+	 */
+	public boolean addMensaje(Mensaje mensaje) {
+		if(mensaje.getAlcance() > this.avgAlcance) {
+			this.cambiarExposicion(this.exposicion.siguiente());
+		} else {
+			this.cambiarExposicion(this.exposicion.anterior());
+		}
+		
+		this.avgAlcance = (avgAlcance * mensajes.size() + mensaje.getAlcance())/(mensajes.size() + 1);
+		mensajes.add(mensaje);
+		return true;
+	}
+	
 	
 	/**
 	 * Devuelve la información de un usuario como cadena de texto

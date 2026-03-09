@@ -78,6 +78,7 @@ public class RedSocial {
 		    	usr_mensaje.add(usuarioOrigen);
 		    	
 		    }
+			
 			mensajes.add(mensaje);
 			for (Usuario u : usr_mensaje) {
 				if (mensaje.difunde(u) == true) {

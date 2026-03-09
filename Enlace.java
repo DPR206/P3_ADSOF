@@ -28,7 +28,8 @@ public class Enlace {
 		this.usuarioDestino = usuarioDestino;
 		if(coste <= 0)
 			this.coste=1;
-		this.coste = coste;
+		else 
+			this.coste = coste;
 		Enlace.total_coste+=this.coste;
 	}
 	
@@ -39,7 +40,7 @@ public class Enlace {
 	 * @param usuarioDestino, usuario de destino
 	 */
 	public Enlace(Usuario usuarioOrigen, Usuario usuarioDestino) {
-		new Enlace(usuarioOrigen, usuarioDestino, 1);
+		this(usuarioOrigen, usuarioDestino, 1);
 	}
 	
 	/**
@@ -94,6 +95,24 @@ public class Enlace {
 	 */
 	public int costeReal() {
 		return this.coste + this.costeEspecial();
+	}
+	
+	/**
+	 * Obtiene la probabilidad de que el mensaje se retorne al usuario que lo lanza
+	 * 
+	 * @return probabilidad de que retorne
+	 */
+	public double getProbabilidad() {
+		return 100;
+	}
+	
+	/**
+	 * Devuelve si el enlace ha sido exitoso o no dependiendo de la probabilidad de retorno
+	 * 
+	 * @return true si ha sido exitoso, falso en caso contrario
+	 */
+	public boolean enlaceExitoso() {
+		return 100 * Math.random() < this.getProbabilidad();
 	}
 	
 	/**

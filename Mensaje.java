@@ -92,7 +92,7 @@ public class Mensaje {
 	}
 	
 	/**
-	 * Determina si el alcance del mensaje es mayor que el coste real del enlace
+	 * Determina si un mensaje se puede difundir por un enlace
 	 * 
 	 * @param e enlace
 	 * @return true si el alcance es mayor o igual que el coste, false en caso contrario
@@ -104,7 +104,7 @@ public class Mensaje {
 	}
 	
 	/**
-	 * Definida para futuras extensiones
+	 * Determina si un mensaje se puede aceptar por un usuario
 	 * 
 	 * @param u usuario
 	 * @return true
@@ -120,9 +120,11 @@ public class Mensaje {
 	 * @return true si se ha difundido el mensaje, false en caso contrario
 	 */
 	public boolean difunde(Enlace e) {
-		if(e.getUsuarioOrigen()==this.usuarioActual && this.puedeDifundirPor(e) && this.aceptadoPor(e.getUsuarioDestino())) {
+		if(e == null)
+			return false;
+		if(e.getUsuarioOrigen()==this.usuarioActual && this.puedeDifundirPor(e) && this.aceptadoPor(e.getUsuarioDestino()) && e.enlaceExitoso()) {
 			this.setUsuarioActual(e.getUsuarioDestino());
-			alcance = alcance - e.getCoste() + e.getUsuarioDestino().getAmplificacion();
+			alcance = alcance - e.costeReal() + e.getUsuarioDestino().getAmplificacion();
 			return true;
 		} else
 			return false;	
@@ -134,10 +136,21 @@ public class Mensaje {
 	 * @param usuarios usuarios sobre los que realizar la difusión
 	 * @return true si se ha difundido el mensaje, false en caso contrario
 	 */
-	public boolean difunde(Usuario...usuarios) {
+	public boolean difunde(Usuario... usuarios) {
 		boolean status = true;
-		Usuario conMensaje = this.usuarioActual;
+		Usuario conMensaje;
 		Enlace e;
+		
+		if(this.usuarioActual instanceof UsuarioInteresado) {
+			e = ((UsuarioInteresado) this.usuarioActual).getBestEnlace();
+			if(e != null) {
+				if(!difunde(e))
+			        return false;
+				return true;
+			}
+		}
+		
+		conMensaje = this.usuarioActual;
 		for(Usuario u:usuarios) {
 			e = conMensaje.getEnlace(u);
 			if(e == null) {
