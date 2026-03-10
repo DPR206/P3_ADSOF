@@ -1,13 +1,9 @@
 /**
- *  Este paquete contiene las clases necesarias para la gestión de una red social
+ * 
  */
 package red_social;
 
 /**
- * Esta clase representa una batería de pruebas
- * @author Claudia Saiz Escribano y Duna Puente Romera. 
- * @version 1.0
- * Nombre del fichero: EjemploUspMensajesBasicos.java
  * 
  */
 public class EjemploUsoMensajesBasicos {
@@ -30,6 +26,7 @@ public class EjemploUsoMensajesBasicos {
 		carmen.addEnlace(new Enlace(carmen, luis, 11));
 		m.difunde(carmen.getEnlace(luis));
 		System.out.println(m);
+
 	}
 
 }

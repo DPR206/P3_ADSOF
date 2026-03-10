@@ -125,6 +125,7 @@ public class Mensaje {
 		if(e.getUsuarioOrigen()==this.usuarioActual && this.puedeDifundirPor(e) && this.aceptadoPor(e.getUsuarioDestino()) && e.enlaceExitoso()) {
 			this.setUsuarioActual(e.getUsuarioDestino());
 			alcance = alcance - e.costeReal() + e.getUsuarioDestino().getAmplificacion();
+			e.getUsuarioDestino().addMensaje(this);
 			return true;
 		} else
 			return false;	
