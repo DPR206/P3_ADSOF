@@ -7,6 +7,10 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * Esta clase representa una fachada de una red social
+ * @author Claudia Saiz Escribano y Duna Puente Romera. 
+ * @version 1.0
+ * Nombre del fichero: RedSocial.java
  * 
  */
 public class RedSocial {

@@ -128,6 +128,10 @@ public class Usuario {
 		return null;
 	}
 	
+	/**
+	 * Obtiene la exposición de un usuario
+	 * @return Exposicion, la exposición del usuario
+	 */
 	public Exposicion getExposicion() {
 		return exposicion;
 	}
