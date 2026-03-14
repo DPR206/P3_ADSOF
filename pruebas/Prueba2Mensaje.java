@@ -1,7 +1,7 @@
 /**
  *  Este paquete contiene las pruebas hechas
  */
-package Pruebas;
+package pruebas;
 
 import red_social.*;
 
