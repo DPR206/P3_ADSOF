@@ -1,5 +1,5 @@
 /**
- * 
+ * Este paquete contiene las clases necesarias para la gestión de una red social
  */
 package red_social;
 
@@ -58,37 +58,46 @@ public class RedSocial {
 		}
 	    
 	    /* Leer mensaje */
-		List <Usuario> usr_mensaje= new ArrayList<Usuario>();
 		Mensaje mensaje;
 		Usuario usr = null;
 		try (BufferedReader br = new BufferedReader(new FileReader(f_mensaje))) {
 			linea = br.readLine();
-			partes = linea.split("\\s+");
-			if(partes.length != 3) {
-	    		throw new IOException("Formato incorrecto de archivo de mensaje");
-	    	}
-			
-			usr = usuarios.get(partes[2]);
-			if(usr == null) {
-				throw new IOException("UsuarioActual incorrecto en archivo de mensaje");
-			}
-			mensaje = new Mensaje(partes[0], Integer.parseInt(partes[1]), usuarioOrigen);
+			while (true) {
+				int inicio = linea.indexOf("\"") + 1;
+				int fin = linea.indexOf("\"", inicio);
+				String texto = linea.substring(inicio, fin);
 				
-			while ((linea = br.readLine()) != null) {
-				usr = null;
-				usr = usuarios.get(linea);
-				if (usr == null) {
-					throw new IOException("Error en usuarios en archivo de mensaje");
+				linea = linea.substring(fin + 1).trim();
+				partes = linea.split("\\s+");
+				if(partes.length != 2) {
+		    		throw new IOException("Formato incorrecto de archivo de mensaje");
+		    	}
+
+				usr = usuarios.get(partes[1]);
+				if(usr == null) {
+					throw new IOException("UsuarioActual incorrecto en archivo de mensaje");
 				}
-		    	usr_mensaje.add(usr);
-		    	
-		    }
-			
-			mensajes.add(mensaje);
-			for (Usuario u : usr_mensaje) {
-				if (mensaje.difunde(u) == true) {
-					System.out.println(mensaje);
-				}
+				mensaje = new Mensaje(texto, Integer.parseInt(partes[0]), usr);
+				
+				while ((linea = br.readLine()) != null) {
+					if((linea.split("\\s+")).length > 1) {
+						break;
+					}
+					usr = null;
+					usr = usuarios.get(linea);
+					if (usr == null) {
+						throw new IOException("Error en usuarios en archivo de mensaje");
+					}
+					if (mensaje.difunde(usr) == true) {
+						System.out.println(mensaje);
+					} else {
+						usr.addMensaje(mensaje);
+					}
+			    }
+				mensajes.add(mensaje);
+				if(linea == null)
+					break;
+
 			}
 		}
 	}
@@ -158,8 +167,9 @@ public class RedSocial {
 	 * @param listaUsuarios a los que se envía dicho mensaje
 	 * @return true si se añade correctamente, false en caso contrario
 	 */
-	public boolean addAndSendMensaje(String texto, int alcance, String usuarioActual, Usuario...listaUsuarios) {
+	public boolean addAndSendMensaje(String texto, int alcance, String usuarioActual, String...listaUsuarios) {
 		Usuario actual = null;
+		boolean status = true;
 		
 		actual = usuarios.get(usuarioActual);
 		if(actual == null) {
@@ -168,10 +178,13 @@ public class RedSocial {
 		
 		Mensaje m = new Mensaje(texto, alcance, actual);
 		mensajes.add(m);
-		if (!m.difunde(listaUsuarios)) {
-			return false;
+		for(String s : listaUsuarios) {
+			if (!m.difunde(usuarios.get(s))) {
+				status = false;
+			}
+			System.out.println(m);
 		}
-		return true;
+		return status;
 	}
 	
 	/**
@@ -203,7 +216,12 @@ public class RedSocial {
 		/* Escribir mensajes */
 		writer = new FileWriter(f_mensajes);
 		for(Mensaje m : mensajes) {
-			writer.write(m.getTexto() + " " + m.getAlcance() + " " + m.getUsuarioActual().getNombre() + "\n");
+			writer.write("\"" + m.getTexto() + "\"" + " " + m.getAlcance() + " " + m.getUsuarioActual().getNombre() + "\n");
+			for(Usuario u : usuarios.values()) {
+				if(u.contieneMensaje(m)) {
+					writer.write(u.getNombre() + "\n");
+				}
+			}
 		}
 		writer.close();
 
