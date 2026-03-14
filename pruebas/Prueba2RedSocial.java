@@ -1,4 +1,4 @@
-package Pruebas;
+package pruebas;
 
 import java.io.IOException;
 import red_social.*;
