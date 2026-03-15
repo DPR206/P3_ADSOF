@@ -9,7 +9,7 @@ import red_social.*;
  * Esta clase representa una batería de pruebas
  * @author Claudia Saiz Escribano y Duna Puente Romera. 
  * @version 1.0
- * Nombre del fichero: EjemploUspMensajesBasicos.java
+ * Nombre del fichero: EjemploUsoMensajesBasicos.java
  * 
  */
 public class EjemploUsoMensajesBasicos {
