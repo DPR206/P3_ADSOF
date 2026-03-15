@@ -1,9 +1,24 @@
+/**
+ *  Este paquete contiene las pruebas hechas
+ */
 package pruebas;
 
 import red_social.*;
 
+/**
+ * Esta clase representa una batería de pruebas
+ * @author Claudia Saiz Escribano y Duna Puente Romera. 
+ * @version 1.0
+ * Nombre del fichero: Prueba1EnlaceSeñuelo.java
+ * 
+ */
 public class Prueba1EnlaceSeñuelo {
 
+	/**
+	 * Punto de entrada para pruebas de la aplicación
+	 * 
+	 * @param args, Argumentos de la línea de comandos
+	 */
 	public static void main(String[] args) {
 		Usuario duna = new Usuario("duna", 10, Exposicion.ALTA);
 		Usuario claudia = new Usuario("claudia", 9, Exposicion.VIRAL);
@@ -26,3 +41,4 @@ public class Prueba1EnlaceSeñuelo {
 	}
 
 }
+
