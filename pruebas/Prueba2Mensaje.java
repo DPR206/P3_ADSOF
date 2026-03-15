@@ -4,7 +4,6 @@
 package pruebas;
 
 import red_social.*;
-
 /**
  * Esta clase representa una batería de pruebas
  * @author Claudia Saiz Escribano y Duna Puente Romera. 
@@ -28,11 +27,12 @@ public class Prueba2Mensaje {
 		Mensaje m1 = new Mensaje("¡HOLA!", 50, ana);
 		
 		ana.addEnlace(new Enlace(ana, luis, 68)); // totalCoste = 0 + 68
+		m1.difunde(ana, luis); // el mensaje no se puede difundir (68 > 50)
 		ana.addEnlace(carmen, 33); // totalCoste = 101 = 68 + 33
 		ana.addEnlace(diego, 20); // totalCoste = 121 = 101 + 20 
-		System.out.println(m1);
-		System.out.println(ana);
-		System.out.println(ana.getEnlace(2));
+		System.out.println(m1); // comprobar formato de impresión // el mensaje no se ha difundido
+		System.out.println(ana); // comprobar formato de impresión
+		System.out.println(ana.getEnlace(2)); // se imprime el enlace entre ana y diego
 		
 		m1.difunde(luis.getEnlace(carmen));
 		System.out.println(m1);
@@ -50,12 +50,12 @@ public class Prueba2Mensaje {
 		 
 		Enlace e1 = new Enlace(carmen, diego, 0); // totalCoste = 148 = 147 + 1  // por defecto coste 1
 		carmen.addEnlace(e1);
-		System.out.println(e1);
-		System.out.println("Total coste: "+e1.getTotalCostes());
-		System.out.println("Número de enlaces (Carmen): "+carmen.getNumEnlaces());
+		System.out.println(e1); 
+		System.out.println("Total coste: "+e1.getTotalCostes()); // totalCoste = 148
+		System.out.println("Número de enlaces (Carmen): "+carmen.getNumEnlaces()); // debería tener 2 enlaces
 		
 		e1.cambiarDestino(ana, -1); // por defecto coste 1
-		System.out.println(e1);
+		System.out.println(e1); // el usuario de destino ahora es ana
 
 	}
 
