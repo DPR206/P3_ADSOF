@@ -26,11 +26,12 @@ public class EjemploUsoMensajes2 {
 		Mensaje m1 = new Mensaje("¡HOLA!", 50, ana);
 		
 		ana.addEnlace(new Enlace(ana, luis, 68)); // totalCoste = 0 + 68
+		m1.difunde(ana, luis); // el mensaje no se puede difundir (68 > 50)
 		ana.addEnlace(carmen, 33); // totalCoste = 101 = 68 + 33
 		ana.addEnlace(diego, 20); // totalCoste = 121 = 101 + 20 
-		System.out.println(m1); // comprobar formato de impresión
+		System.out.println(m1); // comprobar formato de impresión // el mensaje no se ha difundido
 		System.out.println(ana); // comprobar formato de impresión
-		System.out.println(ana.getEnlace(2));
+		System.out.println(ana.getEnlace(2)); // se imprime el enlace entre ana y diego
 		
 		m1.difunde(luis.getEnlace(carmen));
 		System.out.println(m1);
