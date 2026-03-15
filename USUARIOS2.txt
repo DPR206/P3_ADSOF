@@ -1,0 +1,8 @@
+luis 10
+ana 3
+mario 3
+diego 1
+duna 20
+carmen 2
+claudia 19
+fede 0
