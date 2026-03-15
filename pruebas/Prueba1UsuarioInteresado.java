@@ -1,12 +1,24 @@
+/**
+ *  Este paquete contiene las pruebas hechas
+ */
 package pruebas;
 
 import red_social.*;
 
 /**
- * Este programa prueba el funcionamiento de la difusión para Usuarios Interesados
+ * Esta clase representa una batería de pruebas
+ * @author Claudia Saiz Escribano y Duna Puente Romera. 
+ * @version 1.0
+ * Nombre del fichero: Prueba1UsuarioInteresado.java
+ * 
  */
 public class Prueba1UsuarioInteresado{
 
+	/**
+	 * Punto de entrada para pruebas de la aplicación
+	 * 
+	 * @param args, Argumentos de la línea de comandos
+	 */
 	public static void main(String[] args) {
 		Usuario tiago = new Usuario("tiago", 3, Exposicion.BAJA);
 		Usuario andrea = new Usuario("andrea", 5, Exposicion.MEDIA);
