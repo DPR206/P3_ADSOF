@@ -1,8 +1,9 @@
 /**
- *  Este paquete contiene las clases necesarias para la gestión de una red social
+ *  Este paquete contiene las pruebas hechas
  */
-package red_social;
+package pruebas;
 
+import red_social.*;
 /**
  * Esta clase representa una batería de pruebas
  * @author Claudia Saiz Escribano y Duna Puente Romera. 
